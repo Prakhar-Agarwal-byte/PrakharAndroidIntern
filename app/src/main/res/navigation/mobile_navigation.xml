@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/navigation_tags"
+        android:name="com.example.prakharandroidintern.ui.tags.TagsFragment"
+        android:label="TagsFragment" />
+    <fragment
+        android:id="@+id/navigation_explore"
+        android:name="com.example.prakharandroidintern.ui.explore.ExploreFragment"
+        android:label="ExploreFragment" />
+    <fragment
+        android:id="@+id/navigation_trending"
+        android:name="com.example.prakharandroidintern.ui.trending.TrendingFragment"
+        android:label="TrendingFragment" />
+    <fragment
+        android:id="@+id/navigation_saved"
+        android:name="com.example.prakharandroidintern.ui.saved.SavedFragment"
+        android:label="SavedFragment" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.prakharandroidintern.ui.auth.welcome.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_navigation_tags"
+            app:destination="@id/navigation_tags" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.prakharandroidintern.ui.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_OTPFragment"
+            app:destination="@id/OTPFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OTPFragment"
+        android:name="com.example.prakharandroidintern.ui.auth.otp.OTPFragment"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_OTPFragment_to_navigation_tags"
+            app:destination="@id/navigation_tags" />
+        <argument
+            android:name="mobileNumber"
+            app:argType="string" />
+    </fragment>
+</navigation>

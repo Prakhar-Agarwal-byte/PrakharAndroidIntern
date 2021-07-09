@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PrakharAndroidIntern</string>
+    <string name="tags">Tags</string>
+    <string name="trending">Trending</string>
+    <string name="explore">Explore</string>
+    <string name="saved">Saved</string>
+    <string name="facebook_app_id">838439807083036</string>
+    <string name="fb_login_protocol_scheme">fb838439807083036</string>
+
+</resources>

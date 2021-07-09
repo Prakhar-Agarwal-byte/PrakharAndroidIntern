@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "964836404651",
+    "project_id": "prakharandroidintern",
+    "storage_bucket": "prakharandroidintern.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964836404651:android:4e78bcd5675db6851fb6ee",
+        "android_client_info": {
+          "package_name": "com.example.prakharandroidintern"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964836404651-l7mfeqtutodkgebrp0sifv7o8gsb655c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prakharandroidintern",
+            "certificate_hash": "01a5de0463e692402368b9ef63fa3e26072d9e31"
+          }
+        },
+        {
+          "client_id": "964836404651-1tgu7af6ntiv5grm9p6vgkvghk547g0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF8SqI0CEbyWgth68xzluDYhv5vOk6xDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964836404651-1tgu7af6ntiv5grm9p6vgkvghk547g0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
