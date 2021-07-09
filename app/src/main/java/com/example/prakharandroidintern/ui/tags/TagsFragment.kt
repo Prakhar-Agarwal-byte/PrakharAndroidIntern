@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.prakharandroidintern.MainActivity
 import com.example.prakharandroidintern.R
 import com.example.prakharandroidintern.databinding.FragmentTagsBinding
-import com.example.prakharandroidintern.ui.tags.TagsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.chip.Chip
 
 class TagsFragment : Fragment() {
 
-    private lateinit var tagsViewModel: TagsViewModel
     private var _binding: FragmentTagsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -27,9 +26,6 @@ class TagsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        tagsViewModel =
-            ViewModelProvider(this).get(TagsViewModel::class.java)
-
         _binding = FragmentTagsBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -37,9 +33,22 @@ class TagsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).visibility = View.VISIBLE
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Tags"
+         activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
+
+        binding.btnAddTag.setOnClickListener {
+            val searchTerm = binding.etSearchTag.editableText.toString()
+            val chip = Chip(requireActivity())
+            chip.apply {
+                text = searchTerm
+                closeIcon = getDrawable(requireActivity(), R.drawable.ic_baseline_close_24)
+                isCloseIconVisible = true
+                setOnCloseIconClickListener {
+                    binding.chipGroup.removeView(it)
+                }
+            }
+            binding.chipGroup.addView(chip)
+        }
     }
 
     override fun onDestroyView() {
