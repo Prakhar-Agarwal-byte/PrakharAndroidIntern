@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    <data>
+        <variable
+            name="trendingItem"
+            type="com.example.prakharandroidintern.models.TrendingModal" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Title"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Subtitle"
-        android:paddingStart="8dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Title"
+            android:text="@{trendingItem.tag}"
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingBottom="4dp"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Title" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Subtitle"
+            numOfPeople="@{trendingItem.numOfPeople}"
+            android:paddingStart="8dp"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+</layout>

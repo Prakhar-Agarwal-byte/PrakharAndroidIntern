@@ -46,14 +46,11 @@ class WelcomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-
-        return binding.root;
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         // Initialise Google Auth
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -63,41 +60,48 @@ class WelcomeFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         // Initialise Facebook Auth
-        FacebookSdk.sdkInitialize(requireActivity().applicationContext);
+        FacebookSdk.sdkInitialize(requireActivity().applicationContext)
 
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
-        binding.btnFacebookSignIn.setOnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email"))
-            LoginManager.getInstance().registerCallback(callbackManager, object :
-                FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    Log.d(TAG, "facebook:onSuccess:$loginResult")
-                    handleFacebookAccessToken(loginResult.accessToken)
-                }
-
-                override fun onCancel() {
-                    Log.d(TAG, "facebook:onCancel")
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.d(TAG, "facebook:onError", error)
-                }
-            })
-        }
 
         binding.btnGoogleSignIn.setOnClickListener {
-            GoogleSignIn()
+            googleSignIn()
         }
-
+        binding.btnFacebookSignIn.setOnClickListener {
+            onFacebookBtnClicked()
+        }
         binding.btnMobileNumber.setOnClickListener {
-            this.findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+            onMobileBtnClicked()
         }
 
         auth = Firebase.auth
     }
 
-    private fun GoogleSignIn() {
+    fun onMobileBtnClicked() {
+        this.findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+    }
+
+    fun onFacebookBtnClicked() {
+        LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email"))
+        LoginManager.getInstance().registerCallback(callbackManager, object :
+            FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                Log.d(TAG, "facebook:onSuccess:$loginResult")
+                handleFacebookAccessToken(loginResult.accessToken)
+            }
+
+            override fun onCancel() {
+                Log.d(TAG, "facebook:onCancel")
+            }
+
+            override fun onError(error: FacebookException) {
+                Log.d(TAG, "facebook:onError", error)
+            }
+        })
+    }
+
+    private fun googleSignIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -110,10 +114,15 @@ class WelcomeFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    this.findNavController().navigate(R.id.action_welcomeFragment_to_navigation_tags)
+                    this.findNavController()
+                        .navigate(R.id.action_welcomeFragment_to_navigation_tags)
                 } else {
                     Log.d(TAG, task.exception.toString())
-                    Toast.makeText(requireActivity(), "Error: facebook login unsuccessful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        "Error: facebook login unsuccessful",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -138,7 +147,8 @@ class WelcomeFragment : Fragment() {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(requireActivity(), "Google Sign in failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Google Sign in failed", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -152,15 +162,18 @@ class WelcomeFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    this.findNavController().navigate(R.id.action_welcomeFragment_to_navigation_tags)
+                    this.findNavController()
+                        .navigate(R.id.action_welcomeFragment_to_navigation_tags)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(requireActivity(), "Error: Firebase login unsuccessful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        "Error: Firebase login unsuccessful",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

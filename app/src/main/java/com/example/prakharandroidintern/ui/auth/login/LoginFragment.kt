@@ -1,6 +1,5 @@
 package com.example.prakharandroidintern.ui.auth.login
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,14 +18,22 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnSendOTP.setOnClickListener {
-            val mobileNumber = binding.etMobileNumber.editableText.toString()
+            onOTPBtnClicked()
+        }
+    }
+
+    fun onOTPBtnClicked() {
+        val mobileNumber = binding.etMobileNumber.editableText.toString()
+        if (!mobileNumber.isNullOrBlank()) {
             val action = LoginFragmentDirections.actionLoginFragmentToOTPFragment(mobileNumber)
             this.findNavController().navigate(action)
         }
-
-        return binding.root
     }
 
 }

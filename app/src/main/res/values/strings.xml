@@ -6,5 +6,24 @@
     <string name="saved">Saved</string>
     <string name="facebook_app_id">838439807083036</string>
     <string name="fb_login_protocol_scheme">fb838439807083036</string>
+    <string name="login_now">Login Now</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="please_login_to_continue_using_helloji">Please login to continue using Helloji</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="just_a_quick_security_check">Just a quick security check</string>
+    <string name="please_enter_the_security_code_we_sent_you">Please enter the security code we sent you.</string>
+    <string name="it_might_take_a_few_minutes_to_recieve_your_code">It might take a few minutes to recieve your code.</string>
+    <string name="enter_verification_code">Enter Verification code</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="didn_t_recieve_the_code">Didn\'t recieve the code?</string>
+    <string name="send_again">Send Again</string>
+    <string name="search_tags">Search tags</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_login_or_sing_up_to_continue_using_helloji">Please login or sing up to continue using Helloji</string>
+    <string name="login_via_social_network">Login via social network</string>
+    <string name="or_login_with_mobile_number">or login with mobile number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="broadcast">Broadcast</string>
+    <string name="search_by_tags">Search by tags...</string>
 
 </resources>

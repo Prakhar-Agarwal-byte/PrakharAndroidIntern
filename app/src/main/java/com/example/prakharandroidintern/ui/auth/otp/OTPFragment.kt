@@ -30,6 +30,7 @@ class OTPFragment : Fragment() {
     private val args: OTPFragmentArgs by navArgs()
     private val auth = Firebase.auth
     private lateinit var storedVerificationId: String
+    private lateinit var mobileNumber:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,21 +43,25 @@ class OTPFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val mobileNumber = args.mobileNumber
-
+        mobileNumber = args.mobileNumber
         sendVerificationCodeToUser(mobileNumber)
-
         binding.btnVerifyOTP.setOnClickListener {
-            val code = binding.etOTP.editableText.toString()
-            if (code.isNotEmpty()) {
-                verifyCode(code)
-            }
+            onBtnVerifyOTPClicked()
         }
+        binding.tvResendCode.setOnClickListener{
+            onTvResendCodeClicked()
+        }
+    }
 
-        binding.tvResendCode.setOnClickListener {
-            resendVerificationCode(mobileNumber, resendToken)
+    fun onBtnVerifyOTPClicked() {
+        val code = binding.etOTP.editableText.toString()
+        if (code.isNotEmpty()) {
+            verifyCode(code)
         }
+    }
+
+    fun onTvResendCodeClicked() {
+        resendVerificationCode(mobileNumber, resendToken)
     }
 
     private fun resendVerificationCode(
@@ -93,9 +98,9 @@ class OTPFragment : Fragment() {
                 Log.w(TAG, "onVerificationFailed", e)
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
-                    // Invalid request
+                    Log.d(TAG, "Invalid credentials")
                 } else if (e is FirebaseTooManyRequestsException) {
-                    // The SMS quota for the project has been exceeded
+                    Log.d(TAG, "Too many requests")
                 }
 
                 // Show a message and update the UI
@@ -143,13 +148,12 @@ class OTPFragment : Fragment() {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+                        Log.d(TAG, "invalid verification code")
                     }
                     // Update UI
                 }
             }
 
     }
-
 
 }
